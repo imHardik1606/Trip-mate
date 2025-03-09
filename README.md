@@ -3,6 +3,9 @@
 ## 📌 Project Overview
 Gemini Travel Planner is an AI-powered travel assistant that helps users plan their trips efficiently. By leveraging Google Gemini, the project generates a curated list of hotels and daily itineraries based on user input.
 
+## 🌐 Live Link
+[Live Link](https://trip-mate-rouge.vercel.app)
+
 ## 🚀 Features
 - 📍 **Destination-Based Recommendations**: Suggests the best hotels and places to visit based on the chosen destination.
 - 💰 **Budget-Friendly Suggestions**: Offers recommendations within the user's specified budget.
