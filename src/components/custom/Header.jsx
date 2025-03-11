@@ -18,6 +18,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import { Toaster } from "../ui/sonner";
 
 function Header() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -34,7 +35,7 @@ function Header() {
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => GetUserProfile(codeResponse),
-    onError: (err) => console.log(err),
+    onError: (err) => Toaster("Google login failed, please try again!"),
   });
 
   const GetUserProfile = (tokenInfo) => {

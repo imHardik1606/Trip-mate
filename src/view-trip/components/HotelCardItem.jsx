@@ -53,7 +53,7 @@ function HotelCardItem({ hotel }) {
         <div className="my-2 flex flex-col gap-2">
           <h2 className="font-medium">{hotel?.hotelName}</h2>
           <h2 className="text-xs text-gray-600">📍 {hotel?.hotelAddress}</h2>
-          <h2 className="text-sm">💰 ${hotel?.price} per night</h2>
+          <h2 className="text-sm">💰 {hotel?.price} per night</h2>
           <h2 className="text-sm">⭐ {hotel?.rating}</h2>
           {/* <h2 className="text-sm">
                 {Array.from({ length: hotel?.rating || 0 }).map((_, index) => (

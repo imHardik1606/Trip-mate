@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import InfoSection from "../components/InfoSection";
 import Hotels from "../components/Hotels";
 import PlacesToVisit from "../components/PlacesToVisit";
+import { Toaster } from "@/components/ui/sonner";
+
 
 const Viewtrip = () => {
   //getting Id from params
@@ -22,12 +24,12 @@ const Viewtrip = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log("Document: ", docSnap.data());
+      // console.log("Document: ", docSnap.data());
       setTrip(docSnap.data());
-      toast("trip found");
+      Toaster("Document found")
     } else {
-      console.log("No such document");
-      toast("No trip found");
+      // console.log("No such document");
+      Toaster("No trip found");
     }
   };
   return (
