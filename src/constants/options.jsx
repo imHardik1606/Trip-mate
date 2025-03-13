@@ -50,4 +50,12 @@ export const SelectBudgetOptions=[
     }
 ]
 
-export const AI_PROMPT="Generate Travel Plan for Location : {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price, Hotel image url, geo coordinates,  rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for {totalDays} days with each day plan with best time to visit in JSON format"
+export const AI_PROMPT="Generate Travel Plan for Location : {location}, for {totalDays} Days for {traveler} with a {budget} budget, give me Hotels options list with HotelName, Hotel address, Price, Hotel image url, geo coordinates,  rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for {totalDays} days with each day plan with best time to visit in JSON format";
+
+export const travelFacts = [
+    "Did you know? The Great Wall of China is 13,171 miles long!",
+    "Travel Fact: There are over 195 countries in the world—how many have you visited?",
+    "Fun Fact: Antarctica is the only continent without a time zone!",
+    "Did you know? Japan has more than 6,800 islands!",
+    "Adventure Fact: Mount Everest grows about 4mm taller every year!",
+  ];

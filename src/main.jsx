@@ -10,11 +10,13 @@ import Viewtrip from "./view-trip/[tripId]/index";
 import Footer from "./view-trip/components/Footer";
 import MyTrips from "./my-trips";
 import ErrorPage from "./components/custom/ErrorPage";
+import { Toaster } from "./components/ui/sonner";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}>
+        <Toaster/>
         <Header />
         <Routes>
           <Route path="/" element={<App />}></Route>
