@@ -3,6 +3,9 @@ import React from "react";
 import { IoIosSend } from "react-icons/io";
 import { FaShareAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { GetPlaceDetails, PHOTO_REF_URL } from "@/service/GlobalApi";
+
 
 const InfoSection = ({ trip }) => {
   // Function to share trip details
@@ -32,6 +35,30 @@ const InfoSection = ({ trip }) => {
     }
   };
 
+  const [photoUrl, setPhotoUrl] = useState();
+      
+        useEffect(() => {
+          trip && GetPlacePhoto();
+        }, [trip]);
+      
+        const GetPlacePhoto = async () => {
+          const data = {
+            textQuery: trip?.userSelection?.location?.label
+          };
+      
+          const result = await GetPlaceDetails(data).then((resp) => {
+            // console.log(resp.data.places[0].photos[3].name);
+      
+            const PhotoUrl = PHOTO_REF_URL.replace(
+              "{NAME}",
+              resp.data.places[0].photos[3].name
+            );
+      
+            setPhotoUrl(PhotoUrl);
+            // console.log(photoUrl);
+          });
+        };
+
   return (
     <motion.div 
       initial={{ opacity: 0, scale: 0.9 }} 
@@ -41,7 +68,7 @@ const InfoSection = ({ trip }) => {
     >
       {/* Destination Image with Fade Animation */}
       <motion.img 
-        src="/trip.jpg" 
+        src={photoUrl ? photoUrl : "/trip.jpg"}
         alt="Trip" 
         className="h-[340px] w-full object-cover rounded-xl"
         initial={{ opacity: 0, y: 30 }} 
