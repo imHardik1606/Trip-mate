@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { GetPlaceDetails, PHOTO_REF_URL } from "@/service/GlobalApi";
 
-
 const InfoSection = ({ trip }) => {
   // Function to share trip details
   const handleShare = async () => {
@@ -20,14 +19,16 @@ const InfoSection = ({ trip }) => {
         await navigator.share({
           title: "Trip Details",
           text: tripDetails,
-          url: window.location.href, 
+          url: window.location.href,
         });
       } catch (error) {
         console.error("Sharing failed", error);
       }
     } else {
       try {
-        await navigator.clipboard.writeText(tripDetails + `\n🔗 ${window.location.href}`);
+        await navigator.clipboard.writeText(
+          tripDetails + `\n🔗 ${window.location.href}`
+        );
         alert("Trip details copied to clipboard! Share it manually.");
       } catch (error) {
         console.error("Copy failed", error);
@@ -36,76 +37,78 @@ const InfoSection = ({ trip }) => {
   };
 
   const [photoUrl, setPhotoUrl] = useState();
-      
-        useEffect(() => {
-          trip && GetPlacePhoto();
-        }, [trip]);
-      
-        const GetPlacePhoto = async () => {
-          const data = {
-            textQuery: trip?.userSelection?.location?.label
-          };
-      
-          const result = await GetPlaceDetails(data).then((resp) => {
-            // console.log(resp.data.places[0].photos[3].name);
-      
-            const PhotoUrl = PHOTO_REF_URL.replace(
-              "{NAME}",
-              resp.data.places[0].photos[3].name
-            );
-      
-            setPhotoUrl(PhotoUrl);
-            // console.log(photoUrl);
-          });
-        };
+
+  useEffect(() => {
+    trip && GetPlacePhoto();
+  }, [trip]);
+
+  const GetPlacePhoto = async () => {
+    const data = {
+      textQuery: trip?.userSelection?.location?.label,
+    };
+
+    const result = await GetPlaceDetails(data).then((resp) => {
+      // console.log(resp.data.places[0].photos[3].name);
+
+      const PhotoUrl = PHOTO_REF_URL.replace(
+        "{NAME}",
+        resp.data.places[0].photos[3].name
+      );
+
+      setPhotoUrl(PhotoUrl);
+      // console.log(photoUrl);
+    });
+  };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }} 
-      animate={{ opacity: 1, scale: 1 }} 
-      transition={{ duration: 0.5 }} 
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
       className="bg-white shadow-md rounded-xl p-5"
     >
       {/* Destination Image with Fade Animation */}
-      <motion.img 
+      <motion.img
         src={photoUrl ? photoUrl : "/trip.jpg"}
-        alt="Trip" 
+        alt="Trip"
         className="h-[340px] w-full object-cover rounded-xl"
-        initial={{ opacity: 0, y: 30 }} 
-        animate={{ opacity: 1, y: 0 }} 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       />
 
       {/* Info Container */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ delay: 0.2, duration: 0.5 }} 
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
         className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-5"
       >
         <div>
           {/* Destination Title */}
-          <h2 className="font-bold text-2xl sm:text-3xl">{trip?.userSelection?.location?.label}</h2>
+          <h2 className="font-bold text-2xl sm:text-3xl">
+            {trip?.userSelection?.location?.label}
+          </h2>
 
           {/* Trip Details */}
           <div className="flex flex-wrap gap-3 my-3">
-            <motion.h2 
+            <motion.h2
               className="p-2 px-4 bg-gray-200 rounded-full text-gray-700 text-sm md:text-md"
-              whileHover={{ scale: 1.1 }} 
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
               📅 {trip?.userSelection?.noOfDays} Days
             </motion.h2>
-            <motion.h2 
+            <motion.h2
               className="p-2 px-4 bg-gray-200 rounded-full text-gray-700 text-sm md:text-md"
-              whileHover={{ scale: 1.1 }} 
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
               💵 {trip?.userSelection?.budget} Budget
             </motion.h2>
-            <motion.h2 
+            <motion.h2
               className="p-2 px-4 bg-gray-200 rounded-full text-gray-700 text-sm md:text-md"
-              whileHover={{ scale: 1.1 }} 
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
               🧍 Travelers: {trip?.userSelection?.traveler}
@@ -115,10 +118,9 @@ const InfoSection = ({ trip }) => {
 
         {/* Buttons (Send & Share) */}
         <div className="flex gap-3 mt-3 sm:mt-0">
-
-          <motion.div 
-            whileHover={{ scale: 1.1 }} 
-            whileTap={{ scale: 0.9 }} 
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             <Button
