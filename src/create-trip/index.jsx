@@ -31,7 +31,7 @@ function CreateTrip() {
   const [dataPopUp, setDataPopUp] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleInputChange = (name, value) => {
@@ -111,7 +111,7 @@ function CreateTrip() {
     setLoading(false);
 
     //navigating to view trip page
-    navigate('/view-trip/'+docId)
+    navigate("/view-trip/" + docId);
   };
 
   const GetUserProfile = (tokenInfo) => {
@@ -148,15 +148,13 @@ function CreateTrip() {
           <h2 className="text-xl my-3 font-medium">
             What is destination of choice?
           </h2>
-          <GooglePlacesAutocomplete
-            apiKey={import.meta.env.VITE_GOOGLE_PLACE_API_KEY}
-            selectProps={{
-              place,
-              onChange: (v) => {
-                setPlace(v);
-                handleInputChange("location", v);
-              },
-            }}
+          <Input
+            placeholder="Enter a city or destination"
+            type="text"
+            value={formData?.location?.label || ""}
+            onChange={(e) =>
+              handleInputChange("location", { label: e.target.value })
+            }
           />
         </div>
 
@@ -216,9 +214,16 @@ function CreateTrip() {
       </div>
 
       <div className="my-10 justify-end flex">
-        <Button disabled={loading}  onClick={onGenerateTrip} className="p-6 text-xl">
-          {loading ? <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin"/> :
-          "Generate Trip"}
+        <Button
+          disabled={loading}
+          onClick={onGenerateTrip}
+          className="p-6 text-xl"
+        >
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
         </Button>
       </div>
 
